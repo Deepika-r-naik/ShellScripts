@@ -1,34 +1,46 @@
 #!/bin/bash
 
+# Function to execute command and display output
+execute_command() {
+    echo "Executing command: $1"
+    echo "---------------------------"
+    eval "$1"
+    local exit_code=$?
+    if [ $exit_code -ne 0 ]; then
+        echo "Command failed with exit code $exit_code"
+    fi
+    echo "---------------------------"
+}
+
 echo "Uptime:"
-uptime 2>&1
+execute_command "uptime"
 
 echo "Kernel information:"
-uname -a 2>&1
+execute_command "uname -a"
 
 echo "Active Directory information (if applicable):"
-adinfo 2>&1
+execute_command "adinfo"
 
 echo "Disk space usage:"
-df -PTH 2>&1
+execute_command "df -PTH"
 
 echo "Network interface information (using ifconfig):"
-ifconfig 2>&1
+execute_command "ifconfig"
 
 echo "Network interface information (using ip a):"
-ip a 2>&1
+execute_command "ip a"
 
 echo "Routing table:"
-route -n 2>&1
+execute_command "route -n"
 
 echo "System DMI information:"
-dmidecode -t1 2>&1
+execute_command "dmidecode -t1"
 
 echo "Distribution information:"
-cat /etc/*-release 2>&1
+execute_command "cat /etc/*-release"
 
 echo "List of /dev/infmx:"
-ls -la /dev/infmx 2>&1
+execute_command "ls -la /dev/infmx"
 
 echo "List of /dev/oracle:"
-ls -la /dev/oracle 2>&1
+execute_command "ls -la /dev/oracle"
