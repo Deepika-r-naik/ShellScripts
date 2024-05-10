@@ -1,42 +1,34 @@
 #!/bin/bash
 
-# Function to execute command and display output
-execute_command() {
-    echo "Executing command: $1"
-    echo "---------------------------"
-    eval "$1" | tee -a command_output.log
-    echo "---------------------------"
-}
-
 echo "Uptime:"
-execute_command "uptime"
+uptime 2>&1
 
 echo "Kernel information:"
-execute_command "uname -a"
+uname -a 2>&1
 
 echo "Active Directory information (if applicable):"
-execute_command "adinfo"
+adinfo 2>&1
 
 echo "Disk space usage:"
-execute_command "df -PTH"
+df -PTH 2>&1
 
 echo "Network interface information (using ifconfig):"
-execute_command "ifconfig"
+ifconfig 2>&1
 
 echo "Network interface information (using ip a):"
-execute_command "ip a"
+ip a 2>&1
 
 echo "Routing table:"
-execute_command "route -n"
+route -n 2>&1
 
 echo "System DMI information:"
-execute_command "dmidecode -t1"
+dmidecode -t1 2>&1
 
 echo "Distribution information:"
-execute_command "cat /etc/*-release"
+cat /etc/*-release 2>&1
 
 echo "List of /dev/infmx:"
-execute_command "ls -la /dev/infmx"
+ls -la /dev/infmx 2>&1
 
 echo "List of /dev/oracle:"
-execute_command "ls -la /dev/oracle"
+ls -la /dev/oracle 2>&1
